@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+			*{
+				outline: #ee7600;
+			}
+			body{
+				background: #2f2f2f;	
+			}
+			code{
+				padding: 5px;
+				background-color: #999999;
+				border-radius: 15px;
+				cursor: pointer;
+			}
+			p{
+				color: #fff;
+			}
+			::selection {
+				background: #FB850E;
+				color: white;
+			}
+			input{
+				border-radius: 5px;
+				border: none;
+				padding: 5px;
+				color: #fff;
+				background-color: #000;
+			}
+			select{
+				border-radius: 5px;
+				border: none;
+				padding: 5px;
+				color: #fff;
+				background-color: #000;
+			}
+			.button{
+				padding: 10px;
+			}
+			.inv{
+				color: #000;
+			}
+			.table1{
+				color: #fff;
+				border: 1px solid;
+				border-color: #ee7600;
+				background-color: #2f2f2f;
+			}
+			.td1{
+				padding: 5px 20px;
+				border: 1px solid #ee7600;
+			}
+			.textzone{
+				color: #fff;
+				background-color: #000;
+				padding: 10px;
+				border-color: #ee7600;
+				border-radius: 15px;
+				resize: none;
+			}
+			.outtext{
+				text: #6d6d6d;
+			}
+			.hr1{
+				border-bottom: 1px solid #ee7600;
+			}
+			.job{
+				border: 1px solid #000;
+				border-radius: 15px;
+			}
+			.nov{
+				padding: 10px;
+			}
+			.name{
+				padding: 0;
+				margin: 0;
+			}
+			.tipo{
+				padding-top: 0;
+				margin: 0;
+			}
+			.xper{
+				padding-top: 0;
+				margin: 0;
+			}
+			.gtxt{
+				border-radius: 15px;
+				color: #fff;
+				border: none;
+				background-color: #000;
+				padding: 10px;
+			}
+			.txt2{
+				text-align: right;
+			}
+			.pago{
+				font-weight: bold;
+			}
+			.title{
+				text-align: center;
+			}
+			.bckgrnd{
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(47, 47, 47, 0.9);
+			}
+			.helpop{
+				position: fixed;
+				top: 7%;
+				left: 28%;
+				border-radius:15px;
+				background-color: #2f2f2f;
+				border: 1px solid #ee7600;
+				width: 720px;
+				color: white;
+			}
+			.ejemp{
+				margin: 0 40px 0 40px;
+				padding: 10px;
+				padding: 5px;
+				background-color: #999999;
+				border-radius: 15px;
+			}
+			#jaar::-webkit-scrollbar-track{
+				-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+				background-color: #2f2f2f;
+			}
+			#jaar::-webkit-scrollbar{
+				width: 10px;
+			}
+			#jaar::-webkit-scrollbar-thumb{
+				background-color: #F90;
+				border-radius: 10px;
+				background-image: 	-webkit-linear-gradient(45deg,
+									rgba(255, 255, 255, .2) 25%,
+									transparent 25%,
+									transparent 50%,
+									rgba(255, 255, 255, .2) 50%,
+									rgba(255, 255, 255, .2) 75%,
+									transparent 75%,
+									transparent)
+			}
+			.xmple {
+				  border: 0;
+				  margin: 0 10px 0 10px;
+				  height: 1px; 
+				  background-image: -webkit-linear-gradient(left, #999999, #ffffff, #999999);
+				  background-image: -moz-linear-gradient(left, #999999, #ffffff, #999999);
+				  background-image: -ms-linear-gradient(left, #999999, #ffffff, #999999);
+				  background-image: -o-linear-gradient(left, #999999, #ffffff, #999999); 
+			}
+	</style>
+	<title>Decrypt | JAAR</title>
+	<script src="jquery-3.2.1.min.js"></script>
+	<script>
+		function checkKeyCode(evt){
+			var evt = (evt) ? evt : ((event) ? event : null);
+			var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+			if(event.keyCode==112){
+				evt.keyCode=0;
+				help();
+				return false
+			}
+			else if(event.keyCode==113){
+				evt.keyCode=0;
+				gen();
+				return false
+			}
+			else if(event.keyCode==114){
+				evt.keyCode=0;
+				return false
+			}
+			else if(event.keyCode==115){
+				evt.keyCode=0;
+				resetc();
+				return false
+			}
+			else if(event.keyCode==123){
+				evt.keyCode=0;
+				help();
+				return false
+			}
+			else if(event.keyCode==27){
+				evt.keyCode=0;
+				$("#ayud").fadeOut();
+				$("#ayud1").fadeOut();
+				$("#ayud2").fadeOut();
+				$("#ayud3").fadeOut();
+				$("#ayud4").fadeOut();
+				return false
+			}
+		}
+		document.onkeydown=checkKeyCode;
+	</script>
+</head>
+<body id="jaar">
+<div id="ayud" class="bckgrnd" style="display: none;">
+	<div class="helpop">
+		<h1 class="title">Ayuda!</h1>
+		<hr />
+		<h3 style="padding-left: 40px;">Teclas Rapidas</h3>
+		<ul>
+			<li>[F1] - Ayuda</li>
+			<li>[F2] - Executa la accion</li>
+			<li><span style="color: #828282;">[F3] - Guarda el codigo en .txt</span>&nbsp;<span style="color: red;">[desactivado]</span></li>
+			<li>[F4] - Limpia el Codigo.</li>
+			<li>[F5] - Limpia el Codigo y los Campos.</li>
+			<li>[ESC] - Escapa de alguna ventana.</li>
+		</ul>
+				<br />
+				<hr />
+			<center>
+				<input type="button" class="button" value="Teclas R&aacute;pidas" /> |
+				<input type="button" class="button" onclick='$("#ayud").hide(); $("#ayud1").show();' value="Salto de L&iacute;nea" /> | 
+				<input type="button" class="button" onclick='$("#ayud").hide(); $("#ayud2").show();' value="Separador" /> |
+				<input type="button" class="button" onclick='$("#ayud").hide(); $("#ayud3").show();' value="Lista" /> |
+				<input type="button" class="button" onclick='$("#ayud").fadeOut();' value="Cerrar" />
+				<br />
+				<br />
+			</center>
+	</div>
+</div>
+<div id="ayud1" class="bckgrnd" style="display: none;">
+	<div class="helpop">
+		<h1 class="title">Ayuda!</h1>
+		<hr />
+		<h3 style="padding-left: 40px;">Codigos de Ayuda</h3>
+		<span style="padding-left: 20px;"></span><code>&lt;br /&gt;</code> - El elemento HTML <span>line break</span> produce un salto de l&iacute;nea en el texto.<br />
+		<p style="padding-left: 20px;">Modo de Aplicacion en Descripcion del trabajo:</p>
+			<div class="ejemp"><p style="padding-left: 20px;">Gato&lt;br /&gt;Perro.</p></div>
+		<p style="padding-left: 20px;">El usuario lo veria asi:</p>
+			<div class="ejemp"><p style="padding-left: 20px;">Gato<br>Perro.</p></div>
+				<br />
+				<hr />
+			<center>
+				<input type="button" class="button" onclick='$("#ayud1").hide(); $("#ayud").show();' value="Teclas R&aacute;pidas" /> |
+				<input type="button" class="button" value="Salto de L&iacute;nea" /> |
+				<input type="button" class="button" onclick='$("#ayud1").hide(); $("#ayud2").show();' value="Separador" /> | 
+				<input type="button" class="button" onclick='$("#ayud1").hide(); $("#ayud3").show();' value="Lista" /> |
+				<input type="button" class="button" onclick='$("#ayud1").fadeOut();' value="Cerrar" />
+				<br />
+				<br />
+			</center>
+	</div>
+</div>
+<div id="ayud2" class="bckgrnd" style="display: none;">
+	<div class="helpop">
+		<h1 class="title">Ayuda!</h1>
+		<hr>
+		<h3 style="padding-left: 40px;">Codigos de Ayuda</h3>
+		<span style="padding-left: 20px;"></span><code>&lt;hr /&gt;</code> - Es un tipo de separador de Linea horizontal.<br /><br />
+		<p style="padding-left: 20px;">Modo de Aplicacion en Descripcion del trabajo:</p>
+			<div class="ejemp"><p style="padding-left: 20px;">Esto es un texto de relleno.<br />&lt;hr /&gt;<br />Esto es otro texto de relleno.</p></div>
+		<p style="padding-left: 20px;">El usuario lo veria asi:</p>
+			<div class="ejemp"><p style="padding-left: 20px;">Esto es un texto de relleno.</p><hr class="xmple" /><p style="padding-left: 20px;">Esto es otro texto de relleno.</p></div>
+				<br />
+				<hr />
+			<center>
+				<input type="button" class="button" onclick='$("#ayud2").hide(); $("#ayud").show();' value="Teclas R&aacute;pidas" /> | 
+				<input type="button" class="button" onclick='$("#ayud2").hide(); $("#ayud1").show();' value="Salto de L&iacute;nea" /> | 
+				<input type="button" class="button" value="Separador" /> |
+				<input type="button" class="button" onclick='$("#ayud2").hide(); $("#ayud3").show();' value="Lista" /> | 
+				<input type="button" class="button" onclick='$("#ayud2").fadeOut();' value="Cerrar" />
+				<br />
+				<br />
+			</center>
+	</div>
+</div>
+<div id="ayud3" class="bckgrnd" style="display: none;">
+	<div class="helpop">
+		<h1 class="title">Ayuda!</h1>
+		<hr />
+		<h3 style="padding-left: 40px;">Codigos de Ayuda</h3>
+		<span style="padding-left: 20px;"></span><code>&lt;li&gt;</code> - El elemento li del ingles item list o elemento de lista declara cada uno de los elementos de una<br /><span style="padding-left: 71px;"></span>lista.<br />
+		<p style="padding-left: 20px;">Modo de Aplicacion en Descripcion del trabajo:</p>
+			<div class="ejemp"><p style="padding-left: 20px;">&lt;ul&gt;<br />&lt;li&gt;Dato 1&lt;/li&gt;<br />&lt;li&gt;Dato 2&lt;/li&gt;<br />&lt;/ul&gt;</p></div>
+		<p style="padding-left: 20px;">El usuario lo veria asi:</p>
+			<div class="ejemp"><p style="padding-left: 20px;"><ul><li>Dato 1</li><li>Dato 2</li></ul></p></div>
+				<br />
+				<hr />
+			<center>
+				<input type="button" class="button" onclick='$("#ayud3").hide(); $("#ayud").show();' value="Teclas R&aacute;pidas" /> |
+				<input type="button" class="button" onclick='$("#ayud3").hide(); $("#ayud1").show();' value="Salto de L&iacute;nea" /> | 
+				<input type="button" class="button" onclick='$("#ayud3").hide(); $("#ayud2").show();' value="Separador" /> |
+				<input type="button" class="button" value="Lista" /> |
+				<input type="button" class="button" onclick='$("#ayud3").fadeOut();' value="Cerrar" />
+				<br />
+				<br />
+			</center>
+	</div>
+</div>
+<center>
+<table width="100%" class="table1">
+	<tr>
+		<td class="td1">
+			
+			<table width="100%"  class="table1">
+				<tr>
+					<td class="td1" colspan="2">
+						<center>
+							<input type="button" class="button" id="genbtn" onclick="gen()" title="Generar (F2)" value="Generar" />
+						</center>
+					</td>
+				</tr>
+				<tr>
+					<td class="td1">Tipo:</td>
+					<td class="td1">
+						<select class="tipo">
+						<option style="display:none" value="non"><--- Type ---></option>
+						<option value="b64e">BASE64 encrypt</option>
+						<option value="b64d">BASE64 decrypt</option>
+						<option value="mure">Murcielago encrypt</option>
+						<option value="murd">Murcielago decrypt</option>
+						<option value="more">Morse encrypt</option>
+						<option value="mord">Morse decrypt</option>
+						<option value="pole">Polybios encrypt</option>
+						<option value="pold">Polybios decrypt</option>
+						<option value="esce">Escitala encrypt</option>
+						<option value="escd">Escitala decrypt</option>
+						<option value="jaae">JAARenc encrypt</option>
+						<option value="jaad">JAARenc decrypt</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td class="td1">
+						Texto:
+					</td>
+					<td class="td1"><form name="ftjob"><textarea name="tjob" class="gtxt" placeholder="Ingresa texto..." rows="10" cols="70"></textarea></form></td>
+				</tr>
+				<tr>
+					<td class="td1">Modificador:</td>
+					<td class="td1"><input class="sku" size="1" maxlength="1" min="1" max="9" value="0" placeholder="0" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"></td>
+				</tr>
+			</table>
+		</td>
+		<td width="45%"  class="td1">
+			<form name="sall">
+				<textarea name="selk" readonly="readonly" onclick="this.focus();this.select()" class="textzone" placeholder="Esperando datos..." rows="30" cols="97" id="codegen"></textarea>
+				<center>
+				<input type="button" class="button" value="&#10697; Copiar" onClick="javascript:this.form.selk.focus();this.form.selk.select();document.execCommand('copy');">
+				</center>
+			</form>
+			<script>
+			var txt1, txt2, txt3, txt4;
+			document.getElementById('genbtn').focus();
+			window.onload = por100();
+			function resetc(){
+				document.getElementById("codegen").innerText = "";
+			}
+			function gback(){
+				history.back(1);
+			}
+			function icopy(){
+				sall.form.selk.focus();
+				sall.form.selk.select();
+				document.execCommand('copy');
+			}
+			function reseta(){
+				location.reload();
+			}
+			function help(){
+				$("#ayud").fadeIn();
+			}
+			function gen() {
+				txt1 = document.getElementsByClassName("tipo")[0].value;
+				txt2 = document.getElementsByClassName("gtxt")[0].value;
+				txt3 = document.getElementsByClassName("sku")[0].value;
+							
+				if (txt2.length==0){
+					alert('Debes ingresar texto para encriptar o desencriptar texto')
+					document.getElementsByClassName("gtxt").focus();
+					return 0;
+				}
+				else{
+					switch(txt1) {
+						case 'non':
+							alert("Debes elegir un tipo crypt");
+							break;
+						case 'b64e':
+							txt4 = window.btoa(txt2);
+							document.getElementById("codegen").innerText = txt4;
+							break;
+						case 'b64d':
+							txt4 = window.atob(txt2);
+							document.getElementById("codegen").innerText = txt4;
+							break;
+						case 'mure':
+							txt4 = txt2;
+								if(txt3 == 0){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("M", "0");
+										txt4 = txt4.replace("U", "1");
+										txt4 = txt4.replace("R", "2");
+										txt4 = txt4.replace("C", "3");
+										txt4 = txt4.replace("I", "4");
+										txt4 = txt4.replace("E", "5");
+										txt4 = txt4.replace("L", "6");
+										txt4 = txt4.replace("A", "7");
+										txt4 = txt4.replace("G", "8");
+										txt4 = txt4.replace("O", "9");
+										txt4 = txt4.replace("m", "0");
+										txt4 = txt4.replace("u", "1");
+										txt4 = txt4.replace("r", "2");
+										txt4 = txt4.replace("c", "3");
+										txt4 = txt4.replace("i", "4");
+										txt4 = txt4.replace("e", "5");
+										txt4 = txt4.replace("l", "6");
+										txt4 = txt4.replace("a", "7");
+										txt4 = txt4.replace("g", "8");
+										txt4 = txt4.replace("o", "9");
+									}
+								}
+								else if(txt3 == 1){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("M", "1");
+										txt4 = txt4.replace("U", "2");
+										txt4 = txt4.replace("R", "3");
+										txt4 = txt4.replace("C", "4");
+										txt4 = txt4.replace("I", "5");
+										txt4 = txt4.replace("E", "6");
+										txt4 = txt4.replace("L", "7");
+										txt4 = txt4.replace("A", "8");
+										txt4 = txt4.replace("G", "9");
+										txt4 = txt4.replace("O", "0");
+										txt4 = txt4.replace("m", "1");
+										txt4 = txt4.replace("u", "2");
+										txt4 = txt4.replace("r", "3");
+										txt4 = txt4.replace("c", "4");
+										txt4 = txt4.replace("i", "5");
+										txt4 = txt4.replace("e", "6");
+										txt4 = txt4.replace("l", "7");
+										txt4 = txt4.replace("a", "8");
+										txt4 = txt4.replace("g", "9");
+										txt4 = txt4.replace("o", "0");
+									}									
+								}
+								else if(txt3 == 2){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("M", "2");
+										txt4 = txt4.replace("U", "3");
+										txt4 = txt4.replace("R", "4");
+										txt4 = txt4.replace("C", "5");
+										txt4 = txt4.replace("I", "6");
+										txt4 = txt4.replace("E", "7");
+										txt4 = txt4.replace("L", "8");
+										txt4 = txt4.replace("A", "9");
+										txt4 = txt4.replace("G", "0");
+										txt4 = txt4.replace("O", "1");
+										txt4 = txt4.replace("m", "2");
+										txt4 = txt4.replace("u", "3");
+										txt4 = txt4.replace("r", "4");
+										txt4 = txt4.replace("c", "5");
+										txt4 = txt4.replace("i", "6");
+										txt4 = txt4.replace("e", "7");
+										txt4 = txt4.replace("l", "8");
+										txt4 = txt4.replace("a", "9");
+										txt4 = txt4.replace("g", "0");
+										txt4 = txt4.replace("o", "1");
+									}
+								}
+								else if(txt3 == 3){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("M", "3");
+										txt4 = txt4.replace("U", "4");
+										txt4 = txt4.replace("R", "5");
+										txt4 = txt4.replace("C", "6");
+										txt4 = txt4.replace("I", "7");
+										txt4 = txt4.replace("E", "8");
+										txt4 = txt4.replace("L", "9");
+										txt4 = txt4.replace("A", "0");
+										txt4 = txt4.replace("G", "1");
+										txt4 = txt4.replace("O", "2");
+										txt4 = txt4.replace("m", "3");
+										txt4 = txt4.replace("u", "4");
+										txt4 = txt4.replace("r", "5");
+										txt4 = txt4.replace("c", "6");
+										txt4 = txt4.replace("i", "7");
+										txt4 = txt4.replace("e", "8");
+										txt4 = txt4.replace("l", "9");
+										txt4 = txt4.replace("a", "0");
+										txt4 = txt4.replace("g", "1");
+										txt4 = txt4.replace("o", "2");
+									}
+								}
+								else if(txt3 == 4){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("M", "4");
+										txt4 = txt4.replace("U", "5");
+										txt4 = txt4.replace("R", "6");
+										txt4 = txt4.replace("C", "7");
+										txt4 = txt4.replace("I", "8");
+										txt4 = txt4.replace("E", "9");
+										txt4 = txt4.replace("L", "0");
+										txt4 = txt4.replace("A", "1");
+										txt4 = txt4.replace("G", "2");
+										txt4 = txt4.replace("O", "3");
+										txt4 = txt4.replace("m", "4");
+										txt4 = txt4.replace("u", "5");
+										txt4 = txt4.replace("r", "6");
+										txt4 = txt4.replace("c", "7");
+										txt4 = txt4.replace("i", "8");
+										txt4 = txt4.replace("e", "9");
+										txt4 = txt4.replace("l", "0");
+										txt4 = txt4.replace("a", "1");
+										txt4 = txt4.replace("g", "2");
+										txt4 = txt4.replace("o", "3");
+									}
+								}
+								else if(txt3 == 5){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("M", "5");
+										txt4 = txt4.replace("U", "6");
+										txt4 = txt4.replace("R", "7");
+										txt4 = txt4.replace("C", "8");
+										txt4 = txt4.replace("I", "9");
+										txt4 = txt4.replace("E", "0");
+										txt4 = txt4.replace("L", "1");
+										txt4 = txt4.replace("A", "2");
+										txt4 = txt4.replace("G", "3");
+										txt4 = txt4.replace("O", "4");
+										txt4 = txt4.replace("m", "5");
+										txt4 = txt4.replace("u", "6");
+										txt4 = txt4.replace("r", "7");
+										txt4 = txt4.replace("c", "8");
+										txt4 = txt4.replace("i", "9");
+										txt4 = txt4.replace("e", "0");
+										txt4 = txt4.replace("l", "1");
+										txt4 = txt4.replace("a", "2");
+										txt4 = txt4.replace("g", "3");
+										txt4 = txt4.replace("o", "4");
+									}
+								}
+								else if(txt3 == 6){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("M", "6");
+										txt4 = txt4.replace("U", "7");
+										txt4 = txt4.replace("R", "8");
+										txt4 = txt4.replace("C", "9");
+										txt4 = txt4.replace("I", "0");
+										txt4 = txt4.replace("E", "1");
+										txt4 = txt4.replace("L", "2");
+										txt4 = txt4.replace("A", "3");
+										txt4 = txt4.replace("G", "4");
+										txt4 = txt4.replace("O", "5");
+										txt4 = txt4.replace("m", "6");
+										txt4 = txt4.replace("u", "7");
+										txt4 = txt4.replace("r", "8");
+										txt4 = txt4.replace("c", "9");
+										txt4 = txt4.replace("i", "0");
+										txt4 = txt4.replace("e", "1");
+										txt4 = txt4.replace("l", "2");
+										txt4 = txt4.replace("a", "3");
+										txt4 = txt4.replace("g", "4");
+										txt4 = txt4.replace("o", "5");
+									}
+								}
+								else if(txt3 == 7){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("M", "7");
+										txt4 = txt4.replace("U", "8");
+										txt4 = txt4.replace("R", "9");
+										txt4 = txt4.replace("C", "0");
+										txt4 = txt4.replace("I", "1");
+										txt4 = txt4.replace("E", "2");
+										txt4 = txt4.replace("L", "3");
+										txt4 = txt4.replace("A", "4");
+										txt4 = txt4.replace("G", "5");
+										txt4 = txt4.replace("O", "6");
+										txt4 = txt4.replace("m", "7");
+										txt4 = txt4.replace("u", "8");
+										txt4 = txt4.replace("r", "9");
+										txt4 = txt4.replace("c", "0");
+										txt4 = txt4.replace("i", "1");
+										txt4 = txt4.replace("e", "2");
+										txt4 = txt4.replace("l", "3");
+										txt4 = txt4.replace("a", "4");
+										txt4 = txt4.replace("g", "5");
+										txt4 = txt4.replace("o", "6");
+									}
+								}
+								else if(txt3 == 8){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("M", "8");
+										txt4 = txt4.replace("U", "9");
+										txt4 = txt4.replace("R", "0");
+										txt4 = txt4.replace("C", "1");
+										txt4 = txt4.replace("I", "2");
+										txt4 = txt4.replace("E", "3");
+										txt4 = txt4.replace("L", "4");
+										txt4 = txt4.replace("A", "5");
+										txt4 = txt4.replace("G", "6");
+										txt4 = txt4.replace("O", "7");
+										txt4 = txt4.replace("m", "8");
+										txt4 = txt4.replace("u", "9");
+										txt4 = txt4.replace("r", "0");
+										txt4 = txt4.replace("c", "1");
+										txt4 = txt4.replace("i", "2");
+										txt4 = txt4.replace("e", "3");
+										txt4 = txt4.replace("l", "4");
+										txt4 = txt4.replace("a", "5");
+										txt4 = txt4.replace("g", "6");
+										txt4 = txt4.replace("o", "7");
+									}
+								}
+								else if(txt3 == 9){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("M", "9");
+										txt4 = txt4.replace("U", "0");
+										txt4 = txt4.replace("R", "1");
+										txt4 = txt4.replace("C", "2");
+										txt4 = txt4.replace("I", "3");
+										txt4 = txt4.replace("E", "4");
+										txt4 = txt4.replace("L", "5");
+										txt4 = txt4.replace("A", "6");
+										txt4 = txt4.replace("G", "7");
+										txt4 = txt4.replace("O", "8");
+										txt4 = txt4.replace("m", "9");
+										txt4 = txt4.replace("u", "0");
+										txt4 = txt4.replace("r", "1");
+										txt4 = txt4.replace("c", "2");
+										txt4 = txt4.replace("i", "3");
+										txt4 = txt4.replace("e", "4");
+										txt4 = txt4.replace("l", "5");
+										txt4 = txt4.replace("a", "6");
+										txt4 = txt4.replace("g", "7");
+										txt4 = txt4.replace("o", "8");
+									}
+								}
+							document.getElementById("codegen").innerText = txt4;
+							break;
+						case 'murd':
+							txt4 = txt2;
+								if(txt3 == 0){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("0", "m");
+										txt4 = txt4.replace("1", "u");
+										txt4 = txt4.replace("2", "r");
+										txt4 = txt4.replace("3", "c");
+										txt4 = txt4.replace("4", "i");
+										txt4 = txt4.replace("5", "e");
+										txt4 = txt4.replace("6", "l");
+										txt4 = txt4.replace("7", "a");
+										txt4 = txt4.replace("8", "g");
+										txt4 = txt4.replace("9", "o");
+									}
+								}
+								else if(txt3 == 1){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("1", "m");
+										txt4 = txt4.replace("2", "u");
+										txt4 = txt4.replace("3", "r");
+										txt4 = txt4.replace("4", "c");
+										txt4 = txt4.replace("5", "i");
+										txt4 = txt4.replace("6", "e");
+										txt4 = txt4.replace("7", "l");
+										txt4 = txt4.replace("8", "a");
+										txt4 = txt4.replace("9", "g");
+										txt4 = txt4.replace("0", "o");
+									}									
+								}
+								else if(txt3 == 2){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("2", "m");
+										txt4 = txt4.replace("3", "u");
+										txt4 = txt4.replace("4", "r");
+										txt4 = txt4.replace("5", "c");
+										txt4 = txt4.replace("6", "i");
+										txt4 = txt4.replace("7", "e");
+										txt4 = txt4.replace("8", "l");
+										txt4 = txt4.replace("9", "a");
+										txt4 = txt4.replace("0", "g");
+										txt4 = txt4.replace("1", "o");
+									}
+								}
+								else if(txt3 == 3){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("3", "m");
+										txt4 = txt4.replace("4", "u");
+										txt4 = txt4.replace("5", "r");
+										txt4 = txt4.replace("6", "c");
+										txt4 = txt4.replace("7", "i");
+										txt4 = txt4.replace("8", "e");
+										txt4 = txt4.replace("9", "l");
+										txt4 = txt4.replace("0", "a");
+										txt4 = txt4.replace("1", "g");
+										txt4 = txt4.replace("2", "o");
+									}
+								}
+								else if(txt3 == 4){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("4", "m");
+										txt4 = txt4.replace("5", "u");
+										txt4 = txt4.replace("6", "r");
+										txt4 = txt4.replace("7", "c");
+										txt4 = txt4.replace("8", "i");
+										txt4 = txt4.replace("9", "e");
+										txt4 = txt4.replace("0", "l");
+										txt4 = txt4.replace("1", "a");
+										txt4 = txt4.replace("2", "g");
+										txt4 = txt4.replace("3", "o");
+									}
+								}
+								else if(txt3 == 5){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("5", "m");
+										txt4 = txt4.replace("6", "u");
+										txt4 = txt4.replace("7", "r");
+										txt4 = txt4.replace("8", "c");
+										txt4 = txt4.replace("9", "i");
+										txt4 = txt4.replace("0", "e");
+										txt4 = txt4.replace("1", "l");
+										txt4 = txt4.replace("2", "a");
+										txt4 = txt4.replace("3", "g");
+										txt4 = txt4.replace("4", "o");
+									}
+								}
+								else if(txt3 == 6){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("6", "m");
+										txt4 = txt4.replace("7", "u");
+										txt4 = txt4.replace("8", "r");
+										txt4 = txt4.replace("9", "c");
+										txt4 = txt4.replace("0", "i");
+										txt4 = txt4.replace("1", "e");
+										txt4 = txt4.replace("2", "l");
+										txt4 = txt4.replace("3", "a");
+										txt4 = txt4.replace("4", "4");
+										txt4 = txt4.replace("5", "o");
+									}
+								}
+								else if(txt3 == 7){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("7", "m");
+										txt4 = txt4.replace("8", "u");
+										txt4 = txt4.replace("9", "r");
+										txt4 = txt4.replace("0", "c");
+										txt4 = txt4.replace("1", "i");
+										txt4 = txt4.replace("2", "e");
+										txt4 = txt4.replace("3", "l");
+										txt4 = txt4.replace("4", "a");
+										txt4 = txt4.replace("5", "g");
+										txt4 = txt4.replace("6", "o");
+									}
+								}
+								else if(txt3 == 8){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("8", "m");
+										txt4 = txt4.replace("9", "u");
+										txt4 = txt4.replace("0", "r");
+										txt4 = txt4.replace("1", "c");
+										txt4 = txt4.replace("2", "i");
+										txt4 = txt4.replace("3", "e");
+										txt4 = txt4.replace("4", "l");
+										txt4 = txt4.replace("5", "a");
+										txt4 = txt4.replace("6", "g");
+										txt4 = txt4.replace("7", "o");
+									}
+								}
+								else if(txt3 == 9){
+									for (i = 0; i < txt2.length; i++) {
+										txt4 = txt4.replace("9", "m");
+										txt4 = txt4.replace("0", "u");
+										txt4 = txt4.replace("1", "r");
+										txt4 = txt4.replace("2", "c");
+										txt4 = txt4.replace("3", "i");
+										txt4 = txt4.replace("4", "e");
+										txt4 = txt4.replace("5", "l");
+										txt4 = txt4.replace("6", "a");
+										txt4 = txt4.replace("7", "g");
+										txt4 = txt4.replace("8", "o");
+									}
+								}
+							document.getElementById("codegen").innerText = txt4;
+							break;
+						default:
+							alert("Sistema aun no desarrollado");
+					}
+				}
+				return false
+			}
+			alert("");
+			</script>
+		</td>
+	</tr>
+</table>
+<p style="color: #2d2d2d; cursor: default;">
+	Desarrollado por JaviertINC
+</p>
+</center>
+</body>
+</html>
